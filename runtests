@@ -14,7 +14,14 @@ do
 		./flat1 $INFILE > tempout
 		if diff $OUTFILE tempout > /dev/null
 		then
-			rm -rf tempout
+			./flat1 tempout > otherout
+			if diff tempout otherout > /dev/null
+			then
+				rm -rf tempout otherout
+			else
+				echo "Reflattening output $N doesn't yield same result"
+				exit
+			fi
 		else
 			echo test $N failed
 			exit
