@@ -21,26 +21,23 @@ func main() {
 		log.Fatal(err)
 	}
 
-	flatten("", x)
+	fmt.Println("{")
+	flatten("", "", x)
+	fmt.Println("\n}")
 }
 
-func flatten(hdr string, d interface{}) {
-	// fmt.Printf("%q: %T\n", hdr, d)
+func flatten(comma string, hdr string, d interface{}) {
 	switch d.(type) {
 	case float64:
-		fmt.Printf("\t%q: %f,\n", hdr, d.(float64))
+		fmt.Printf("%s\n\t%q: %f", comma, hdr, d.(float64))
 	case map[string]interface{}:
-		if hdr != "" {
-			fmt.Printf("\t%q: ", hdr)
-		}
-		fmt.Println("{")
 		for name, interf := range d.(map[string]interface{}) {
 			newhdr := name
 			if hdr != "" {
 				newhdr = fmt.Sprintf("%s.%s", hdr, name)
 			}
-			flatten(newhdr, interf)
+			flatten(comma, newhdr, interf)
+			comma = ","
 		}
-		fmt.Println("}")
 	}
 }
