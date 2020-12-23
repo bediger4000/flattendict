@@ -1,0 +1,6 @@
+{
+	"key1": 5,
+	"key2": 6,
+	"key3": 7,
+	"map1": {"subkey1": 12, "subkey2": 13, "submap1":{"subsubkey1": 42}}
+}
