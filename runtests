@@ -1,0 +1,23 @@
+#!/bin/bash
+set -eou pipefail
+
+go build flat1.go
+
+for INFILE in in*
+do
+	N=$(echo $INFILE | sed 's/in//')
+	OUTFILE=out$N
+	if [[ ! -r $OUTFILE ]]
+	then
+		echo Desired output for $INFILE doesn\'t exist
+	else
+		./flat1 $INFILE > tempout
+		if diff $OUTFILE tempout > /dev/null
+		then
+			rm -rf tempout
+		else
+			echo test $N failed
+			exit
+		fi
+	fi
+done
