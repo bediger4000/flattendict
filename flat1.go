@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"sort"
 )
 
 func main() {
@@ -31,12 +32,19 @@ func flatten(comma string, hdr string, d interface{}) {
 	case float64:
 		fmt.Printf("%s\n\t%q: %f", comma, hdr, d.(float64))
 	case map[string]interface{}:
-		for name, interf := range d.(map[string]interface{}) {
+		m := d.(map[string]interface{})
+		// sort keys to make output repeatable
+		keys := make([]string, 0, len(m))
+		for k := range m {
+			keys = append(keys, k)
+		}
+		sort.Sort(sort.StringSlice(keys))
+		for _, name := range keys {
 			newhdr := name
 			if hdr != "" {
 				newhdr = fmt.Sprintf("%s.%s", hdr, name)
 			}
-			flatten(comma, newhdr, interf)
+			flatten(comma, newhdr, m[name])
 			comma = ","
 		}
 	}
