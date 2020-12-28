@@ -1,0 +1,17 @@
+#!/bin/bash
+set -eou pipefail
+
+for TEST in in?
+do
+	./flat1 $TEST > tempflat
+	./beef1 tempflat | jq . > temp3d
+	if diff $TEST temp3d > /dev/null
+	then
+		:
+	else
+		#diff $TEST temp3d
+		echo $TEST failed
+		exit 1
+	fi
+	rm tempflat temp3d
+done
