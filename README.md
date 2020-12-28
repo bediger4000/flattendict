@@ -82,6 +82,19 @@ so it's possible to flatten a dictionary,
 then run the flattened dictionary's output
 back through the flattening process.
 
+#### Reconstitute flattened dictionaries
+
+Is this transformation a bijective function on dictionaries?
+That is, can you "flatten" a dictionary,
+then make it 3-D again, and get back the original?
+
+[Yes, you can](beef1.go)
+
+I'm not sure it's a bijection,
+but you can flatten a nested dictionary of dictionaries,
+and turn it back into an apparently identical
+dictionary of dictionaries.
+
 ### Interview Analysis
 
 This is really not an "easy" problem,
