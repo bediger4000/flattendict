@@ -38,6 +38,10 @@ func flatten(comma string, hdr string, d interface{}) {
 		for k := range m {
 			keys = append(keys, k)
 		}
+		if len(keys) == 0 {
+			fmt.Printf("%s\n\t%q: {}", comma, hdr)
+			return
+		}
 		sort.Sort(sort.StringSlice(keys))
 		for _, name := range keys {
 			newhdr := name
