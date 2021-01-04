@@ -88,7 +88,7 @@ Is this transformation a bijective function on dictionaries?
 That is, can you "flatten" a dictionary,
 then make it 3-D again, and get back the original?
 
-[Yes, you can](beef1.go)
+[Yes, you can](beef1.go), along with some [testing](runt2)
 
 I'm not sure it's a bijection,
 but you can flatten a nested dictionary of dictionaries,
@@ -102,3 +102,12 @@ at least not in Go, and not in many other languages.
 I'll agree that it's "easy" to sketch out a solution,
 but one that may or may not handle corner cases correctly,
 and one that doesn't do the output correctly.
+
+Job candidates might note that the assumption that
+non-flattened-dictionary keys do not contain dots
+eliminates some work:
+it's certainly possible to do "byte-stuffing"
+or other encoding of '.' characters so that non-flattened keys
+could contain dots.
+This requires some experience or a good memory to know,
+so it's just worth a comment.
