@@ -58,7 +58,7 @@ func flatten(comma string, name string, d interface{}) {
 // rest of func
 ```
 When `func flatten` receives a float64,
-it prints out a namedspaced key and the float64.
+it prints out a namespaced key and the float64.
 
 When `func flatten` receives a map,
 it iterates over key/value pairs in the map.
